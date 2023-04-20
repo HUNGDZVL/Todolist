@@ -8,13 +8,13 @@ const blockbtnAdds = $$(".content__item--add");
 function start() {
   //click +
   handleClickbtnAdds();
-  //reload khong mat data
+  //reload browser khong mat data
   showReload();
 }
 
 start();
 
-// func add block input in Block Add when click icon +
+// func add form input in HTML when click icon +
 function handleClickbtnAdds() {
   const creatDiv = document.createElement("div");
   const globalForm = $(".app");
@@ -32,9 +32,9 @@ function handleClickbtnAdds() {
   for (let btnadd of btnAdds) {
     //click +
     btnadd.addEventListener("click", function (e) {
-      // ngăn even close nổi bọt lên +
+      // ngăn even close form nổi bọt lên +
       e.stopPropagation();
-
+      // thêm form input thông qua appendChild
       let blockAdd = e.target.parentNode.parentNode;
       creatDiv.innerHTML = htmls;
       blockAdd.appendChild(creatDiv);
@@ -43,10 +43,10 @@ function handleClickbtnAdds() {
       const open = $("#div-js");
       open.classList.remove("close");
 
-      // import items and get items (lick button)
+      // import items and get items (click button)
       const buttonAdd = $("button");
       buttonAdd.addEventListener("click", (e) => {
-        const blItem = e.target.parentNode.parentNode;
+        const blItem = e.target.parentNode.parentNode; // get elemen parent
         getDataAndAddData();
 
         // getdata localstroage
@@ -54,7 +54,6 @@ function handleClickbtnAdds() {
         // console.log(infoData.length);
         // kiem tra value in localstogra
         //show Item When Click Add
-        console.log(blItem);
         const valuetext = blItem.querySelector(".input-js").value;
         const valuefile = blItem.querySelector(".file-js");
 
@@ -66,7 +65,6 @@ function handleClickbtnAdds() {
             content: valuetext,
             path: "./assets/img/" + filess,
           };
-          console.log(info);
 
           const blDivvv = document.createElement("div");
           blDivvv.className = "content__item--child";
@@ -137,8 +135,6 @@ function getDataAndAddData() {
     // } else{
     //   information = [];
     // }
-    console.log(information);
-    console.log(newinfo);
 
     information.push(newinfo);
     // set data in local storage
