@@ -78,7 +78,8 @@ function handleClickbtnAdds() {
         resetInput();
         //call function
 
-        clearItem();
+        clearItem(); // remove
+        reloadPageAfterDelay(20);
       });
 
       // ngăn even close nổi bọt lên form
@@ -109,15 +110,25 @@ function getDataAndAddData() {
     alert("Please entry information!");
   } else {
     let file = valueInputfile.files[0].name;
-    var newinfomation = {
+    let newinfo = {
       content: valueInputtext,
       path: "./assets/img/" + file,
       adress: childbl,
     };
 
-    var information = [];
+    let information = localStorage.getItem("data")
+      ? JSON.parse(localStorage.getItem("data"))
+      : [];
+    // let information = [];
+    // if (localStorage.getItem("data")) {
+    //   information = JSON.parse(localStorage.getItem("data"));
+    // } else{
+    //   information = [];
+    // }
+    console.log(information);
+    console.log(newinfo);
 
-    information.push(newinfomation);
+    information.push(newinfo);
     // set data in local storage
     localStorage.setItem("data", JSON.stringify(information));
   }
@@ -138,7 +149,6 @@ function clearItem() {
       const itemtrash = e.target.parentNode.parentNode;
 
       blItemtrash.removeChild(itemtrash);
-      localStorage.setItem("data", JSON.stringify(null));
     });
   }
 }
@@ -152,23 +162,38 @@ function resetInput() {
 }
 
 function showReload() {
-  const infoData = JSON.parse(localStorage.getItem("data"));
-  let address = infoData[0].adress;
+  let infoData = localStorage.getItem("data")
+    ? JSON.parse(localStorage.getItem("data"))
+    : [];
+  var addr;
+  console.log(infoData);
+  if (infoData.length > 0) {
+    let address;
+    let contentid;
+    let pathid
+    for (let i = 0; i < infoData.length; i++) {
+      address = infoData[i].adress;
+      contentid = infoData[i].content;
+      pathid = infoData[i].path;
+      
 
-  const allP = $$("p");
-  let addr;
-  for (let i = 0; i < allP.length; i++) {
-    if (allP[i].textContent === address) {
-      addr = allP[i].parentNode.parentNode;
-      break;
-    }
-  }
-  // kiem tra value in localstogra
-  if (infoData) {
-    const blDivv = document.createElement("div");
-    blDivv.className = "content__item--child";
-    const htmlss = infoData.map((item) => {
-      return `
+      const allP = $$("p");
+
+      for (let i = 0; i < allP.length; i++) {
+        if (allP[i].textContent === address) {
+          addr = allP[i].parentNode.parentNode;
+          break;
+        }
+      }
+
+      // kiem tra value in localstogra
+      if (infoData) {
+        const blDivv = document.createElement("div");
+        blDivv.className = "content__item--child";
+        const htmlss = infoData.map((item) => {
+          if(item.adress===address && item.path===pathid && item.content===contentid){
+           
+          return `
                     <div class="item__child">
                     <i class="iconR fa-solid fa-trash js-trash"></i>
                       <div class="textimg">
@@ -180,12 +205,19 @@ function showReload() {
                     </div>
 
         `;
-    });
-    blDivv.innerHTML = htmlss.join("");
+        }});
+        blDivv.innerHTML = htmlss.join("");
 
-    addr.appendChild(blDivv);
-  } else {
-    alert("data null");
+        addr.appendChild(blDivv);
+      } else {
+        alert("data null");
+      }
+    }
   }
-   clearItem();
+  clearItem();
+}
+function reloadPageAfterDelay(delayInMilliseconds) {
+  setTimeout(function () {
+    location.reload();
+  }, delayInMilliseconds);
 }
