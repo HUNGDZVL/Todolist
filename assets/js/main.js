@@ -66,6 +66,8 @@ function handleClickbtnAdds() {
         blDivv.innerHTML = htmlss;
 
         blItem.appendChild(blDivv);
+        //reset data input
+        resetInput();
         //call function
         // localStorage.setItem("data", JSON.stringify(null));
 
@@ -85,12 +87,14 @@ function handleClickbtnAdds() {
     });
   }
 }
+
+//render item out list
+
 //get data and inport data inblock
 function getDataAndAddData() {
   const valueInputtext = $(".input-js").value;
   const valueInputfile = $(".file-js");
 
-  const btnbutton = $("button");
   if (valueInputfile.files.length === 0 || valueInputtext === "") {
     alert("Please entry information!");
   } else {
@@ -121,4 +125,12 @@ function clearItem() {
       blItemtrash.removeChild(itemtrash);
     });
   }
+}
+
+function resetInput() {
+  let focusInput = $(".input-js");
+  focusInput.value = "";
+  focusInput.focus();
+  let chosenInput = $(".file-js");
+  chosenInput.value = "";
 }
