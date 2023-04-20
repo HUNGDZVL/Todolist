@@ -1,0 +1,940 @@
+$iconcolor: #cdcbcb;
+$bgicon: #fff;
+$colortextB: #12608e;
+$colortextl: #678394;
+$coloractive: #417ed9;
+$colorRed: #f42323;
+
+@mixin roundbtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: $bgicon;
+  align-self: center;
+
+  margin: 12px auto;
+  position: relative;
+
+  & i {
+    position: absolute;
+    top: 12px;
+    right: 13px;
+    font-size: 1.4rem;
+    color: $iconcolor;
+  }
+}
+
+@mixin active {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: $bgicon;
+  align-self: center;
+  position: relative;
+  margin: 12px auto;
+
+  & i {
+    position: absolute;
+    top: 10px;
+    right: 11px;
+    font-size: 1.9rem;
+    color: $coloractive;
+  }
+}
+
+@mixin beforered {
+  content: "";
+  left: 25px;
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  background-color: $colorRed;
+}
+@mixin beforegreen {
+  content: "";
+  left: 25px;
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  background-color: $coloractive;
+}
+
+.app {
+  overflow: hidden;
+  background-color: #f5f4f4;
+}
+.app__header {
+  height: 85px;
+}
+.header__row {
+  height: 85px;
+
+  position: relative;
+  border-bottom: 3px solid #ccc;
+  width: 100%;
+  color: $colortextl;
+}
+
+.header__logo {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.header__logo--icon {
+  @include roundbtn();
+}
+
+.header__logo--text {
+  align-self: center;
+  margin-right: 24px;
+  font-weight: 800;
+  color: $colortextB;
+  p {
+    font-size: 1.8rem;
+  }
+}
+
+.header__menu {
+  display: flex !important;
+  margin-left: -40px;
+
+  & ul {
+    display: flex;
+    padding: 0;
+  }
+}
+
+.header__menu--list {
+  align-items: center;
+  display: flex;
+  margin-left: 66px;
+  margin-right: 20px;
+  & li {
+    width: 82px;
+    text-align: center;
+  }
+}
+
+.header__menu--icon {
+  align-self: center;
+  font-size: 2.2rem;
+  & i {
+    color: $iconcolor;
+  }
+}
+
+.header__search {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  margin-left: -30px;
+}
+
+.header__search--iconsearch {
+  position: relative;
+  background-color: #fff;
+  height: 40px;
+  width: 40px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  & i {
+    top: 12px;
+    left: 12px;
+    position: absolute;
+    font-size: 1.6rem;
+    color: $iconcolor;
+  }
+}
+
+.header__search--input {
+  border: none;
+  line-height: 4rem;
+  width: 260px;
+  background-color: $bgicon;
+  & input {
+    opacity: 0.5;
+    margin-left: 10px;
+    width: 80%;
+  }
+}
+
+.header__search--iconnext {
+  position: relative;
+  background-color: #fff;
+  height: 40px;
+  width: 40px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  & i {
+    top: 12px;
+    left: 12px;
+    position: absolute;
+    font-size: 1.6rem;
+    color: $iconcolor;
+  }
+}
+
+.header__info {
+  display: flex !important;
+  margin-left: 50px;
+}
+
+.header__info--contact {
+  display: flex;
+  & .contact__user {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background-color: $bgicon;
+    align-self: center;
+    position: relative;
+    & i {
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      color: $iconcolor;
+    }
+  }
+  & .contact__name {
+    align-self: center;
+    margin-left: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    width: 72px;
+    color: $colortextl;
+  }
+}
+
+.header__info--bell {
+  @include roundbtn();
+  margin-left: 24px;
+
+  &::before {
+    @include beforered();
+  }
+}
+
+.header__info--close {
+  @include roundbtn();
+}
+
+.app__container {
+  display: flex;
+  flex-direction: column;
+}
+.container__sidebar {
+  justify-content: space-around;
+  display: flex !important;
+  flex-direction: column;
+  border-right: 3px solid $iconcolor;
+}
+
+.container__sidebar--top {
+  margin-top: 40px;
+}
+
+.container__sidebar--laban {
+  @include active();
+  margin-bottom: 22px;
+}
+
+.container__sidebar--star {
+  @include roundbtn();
+  margin-bottom: 22px;
+}
+
+.container__sidebar--masage {
+  position: relative;
+  @include roundbtn();
+  margin-bottom: 22px;
+
+  &::before {
+    @include beforegreen();
+  }
+}
+
+.container__sidebar--chungkhoan {
+  margin-bottom: 22px;
+
+  @include roundbtn();
+}
+
+.container__sidebar--earth {
+  @include roundbtn();
+  margin-bottom: 22px;
+}
+
+.container__sidebar--lego {
+  @include roundbtn();
+  margin-bottom: 22px;
+}
+
+.info__contact--icon {
+  display: flex;
+  margin-top: 40px;
+  justify-content: space-around;
+}
+.contact--icon {
+  @include roundbtn();
+}
+
+.contact--icon {
+  @include roundbtn();
+}
+.info__contact--img {
+  top: 20px;
+  display: block;
+  width: 130px;
+  height: 130px;
+  border-top: 3px solid $iconcolor;
+  border-left: 3px solid $coloractive;
+  border-right: 3px solid $coloractive;
+  border-bottom: 3px solid $coloractive;
+  transform: rotate(45deg);
+  border-radius: 75%;
+  margin: auto;
+  position: relative;
+
+  p {
+    position: absolute;
+    line-height: 2.3rem;
+    font-size: 1.5rem;
+    left: 97px;
+    color: #fff;
+    background-color: $coloractive;
+
+    border-radius: 100%;
+    background-color: $coloractive;
+    width: 27px;
+    top: 2px;
+    transform: rotate(315deg);
+    height: 27px;
+    text-align: center;
+  }
+
+  & img {
+    transform: rotate(320deg);
+    width: 100%;
+    max-width: 100px;
+    height: 100px;
+    display: block;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 12px;
+    margin-left: 12px;
+  }
+}
+.info__contact--text {
+  text-align: center;
+  margin-top: 55px;
+  & p {
+    font-size: 1.4rem;
+    color: $colortextl;
+  }
+  & p:nth-child(1) {
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: $colortextB;
+  }
+}
+.table-info {
+  border-radius: 10px; /* Thiết lập độ cong của 4 góc bảng */
+  text-align: center;
+  border-collapse: collapse; /* Thiết lập border-collapse */
+  width: 100%;
+  margin-top: 50px;
+
+  & th,
+  td {
+    &:hover {
+      transform: scale(1.2);
+      background-color: $bgicon;
+      border-radius: 12%;
+      border: none !important;
+      .text,
+      .icon {
+        color: $coloractive;
+        position: relative;
+      }
+      .icon {
+        &::before {
+          @include beforegreen();
+          top: -11px;
+        }
+      }
+    }
+
+    transition: transform 0.1s ease-in-out;
+    width: 115px;
+    display: inline-block;
+    height: 90px;
+    border: 1px solid $iconcolor; /* Thiết lập đường viền */
+    padding: 8px; /* Thiết lập padding cho các ô */
+    /* Các thuộc tính CSS khác cho ô dữ liệu và tiêu đề (nếu cần) */
+    & icon {
+      font-size: 1.4rem;
+      text-align: center;
+    }
+  }
+  td {
+    & .icon {
+      font-size: 2rem;
+      text-align: center;
+      color: $iconcolor;
+      width: 30px;
+      margin: auto;
+      margin-bottom: 14px;
+      margin-top: 12px;
+      position: relative;
+    }
+    & .text {
+      font-size: 1.4rem;
+      color: $iconcolor;
+      margin-top: 4px;
+      font-weight: 600;
+      text-align: center;
+      margin: auto;
+    }
+  }
+}
+.container__sidebar--bot {
+  margin-top: 200px;
+  & .sidebar__bot-img:nth-child(1) {
+    &::before {
+      @include beforegreen();
+      left: 70px !important;
+    }
+  }
+}
+.container__info--icon {
+  text-align: center;
+  width: 225px;
+  margin: auto;
+  padding: 12px;
+  border-radius: 20px;
+  margin-top: 180px;
+  background-color: $bgicon;
+  border: none;
+  display: flex;
+  justify-content: space-around;
+  & i {
+    font-size: 1.6rem;
+  }
+  & i:nth-child(1) {
+    color: #f42323;
+  }
+  & i:nth-child(2),
+  i:nth-child(5) {
+    color: #47c736;
+  }
+  & i:nth-child(3) {
+    color: #6d158c;
+  }
+  & i:nth-child(4) {
+    color: #21cbde;
+  }
+}
+.sidebar__bot-img {
+  margin-left: 12px;
+  & img {
+    width: 45px;
+    height: 45px;
+    display: block;
+    object-fit: cover;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 12px;
+    margin-left: 26px;
+  }
+}
+
+.container__content {
+  border: 3px solid $iconcolor;
+  border-radius: 12px;
+  margin-top: 48px;
+}
+.sidebar__bot--icon {
+  @include roundbtn();
+  margin-top: 12px;
+  margin-left: 40px;
+}
+.content__header--nav {
+  align-items: center;
+  display: flex !important;
+  & ul {
+    display: flex;
+  }
+}
+.item-nav {
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 17.1px;
+  color: $colortextl;
+  padding: 34px 5px;
+  & i {
+    margin-right: 8px;
+  }
+}
+.container__heaeder--search {
+  display: flex !important;
+  margin-left: -8px;
+  align-items: center;
+  & .header__search--input {
+    height: 40px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+}
+.container__content {
+  position: relative;
+  left: -26px;
+}
+.container__content--header {
+  border-bottom: 3px solid $iconcolor;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.row.no-gutters.row__content {
+  margin-left: 18px;
+  margin-top: 60px;
+}
+.active--nav {
+  color: $coloractive;
+  border-bottom: 3px solid $coloractive;
+}
+.container__content--item {
+  position: relative;
+  & #div-js {
+    border-radius: 8px;
+    background-color: $bgicon;
+    height: 60px;
+    position: absolute;
+    top: -46px;
+    width: 210px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+    & .input-js {
+      height: 24px;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      padding-left: 12px;
+      padding-bottom: 28px;
+      padding-top: 7px;
+      margin-top: 3px;
+    }
+    button {
+      margin-left: 36px;
+      padding: 4px 4px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      background: $coloractive;
+      color: $bgicon;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+    & .file-js {
+      font-size: 0.9rem;
+      padding-left: 9px;
+      width: 133px;
+    }
+  }
+}
+#close {
+  position: absolute;
+  top: 4px;
+  width: 25px;
+  right: 13px;
+  height: 20px;
+  background: $colorRed;
+  padding-left: 8px;
+  padding-top: 3px;
+  border-radius: 4px;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  & i {
+    color: $bgicon;
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+}
+@keyframes ToIn {
+  from {
+    transform: translateY(-50%);
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.content__item--add {
+  display: flex;
+  justify-content: space-around;
+  background-color: $bgicon;
+  border-radius: 8px;
+  height: 60px;
+  align-items: center;
+  font-size: 1.4rem;
+  border: none;
+  width: 210px;
+  margin-bottom: 35px;
+
+  font-weight: 600;
+  & p {
+    color: $colortextB;
+    font-weight: 800;
+  }
+  & p:nth-child(2) {
+    position: relative;
+    border: 3px solid $iconcolor;
+    width: 30px;
+    line-height: 2.6rem;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 1rem;
+    border-radius: 50%;
+  }
+  & i {
+    color: $iconcolor;
+  }
+}
+.row__content {
+  & .container__content--item:nth-child(1) {
+    & .content__item--add {
+      position: relative;
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        border-left: 3px solid #9b28c4;
+        height: 22px;
+        left: 0;
+      }
+    }
+  }
+  & .container__content--item:nth-child(2) {
+    & .content__item--add {
+      position: relative;
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        border-left: 3px solid #40b0c6;
+        height: 22px;
+        left: 0;
+      }
+    }
+  }
+  & .container__content--item:nth-child(3) {
+    & .content__item--add {
+      position: relative;
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        border-left: 3px solid #dad737;
+        height: 22px;
+        left: 0;
+      }
+    }
+  }
+  & .container__content--item:nth-child(4) {
+    & .content__item--add {
+      position: relative;
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        border-left: 3px solid #27e219;
+        height: 22px;
+        left: 0;
+      }
+    }
+  }
+}
+.content__item--child {
+  margin-bottom: 8px;
+}
+.item--info {
+  display: block;
+  position: relative;
+  border-radius: 8px;
+  background-color: $bgicon;
+  width: 210px;
+  cursor: default;
+  & .img {
+    padding-top: 80%;
+    background-position: center;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  & .text--item {
+    font-size: 1.2rem;
+    padding: 0 12px;
+    color: $colortextB;
+  }
+}
+.textimg {
+  display: flex;
+  padding: 0 5px 0px 4px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  margin: 6px 8px;
+  & img {
+    margin-left: -4px;
+    display: block;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  p {
+    font-size: 1rem;
+    color: $colortextl;
+    font-weight: 600;
+  }
+  i {
+    font-size: 1.4rem;
+    color: $iconcolor;
+  }
+}
+.itemchoes {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 8px;
+  align-items: center;
+  & p {
+    font-size: 1.1rem;
+  }
+  & i {
+    font-size: 1.4rem;
+  }
+  & p,
+  i {
+    color: $colortextl;
+    font-weight: 600;
+  }
+}
+.item__child {
+  background-color: $bgicon;
+  border-radius: 8px;
+  padding: 4px 4px;
+  margin-top: 8px;
+  width: 210px;
+  position: relative;
+  & .iconR {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    cursor: pointer;
+    color: $iconcolor;
+    font-size: 1.2rem;
+    &:hover{
+      transform: scale(1.2);
+    }
+  }
+}
+.text--item {
+  font-size: 1.2rem;
+  padding: 0 10px 10px;
+  color: #12608e;
+  font-weight: 800;
+  width: 180px; /* Kích thước mong muốn */
+  white-space: nowrap; /* Ngăn không cho các từ xuống dòng */
+  overflow: hidden; /* Cắt bớt phần nội dung vượt quá kích thước mong muốn */
+  text-overflow: ellipsis; /* Thêm dấu chấm ba để biểu thị việc cắt bớt */
+}
+.avtchen {
+  margin-right: 10px;
+  & img:nth-child(2) {
+    position: absolute;
+    left: 15px;
+  }
+  & img:nth-child(3) {
+    position: absolute;
+    left: 33px;
+  }
+}
+.fiximg {
+  &img {
+    display: block;
+  }
+}
+.btnadd {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  & p {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: $colortextB;
+  }
+  & i {
+    font-size: 1rem;
+    margin-left: 18px;
+    margin-right: 4px;
+    font-weight: 800;
+    color: $colortextB;
+  }
+}
+.btnsave {
+  width: 40px;
+  height: 30px;
+  border-radius: 8px;
+  background-color: $coloractive;
+  transition: linear 0.1s ease-in-out;
+
+  & p {
+    color: #fff;
+    line-height: 30px;
+    padding-left: 8px;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+.container__content--footer {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 420px;
+  border-radius: 8px;
+  background-color: $bgicon;
+}
+.footer--header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 40px 0;
+  & i:nth-child(1) {
+    font-size: 0.6rem;
+    color: $coloractive;
+    margin-left: -18px;
+  }
+
+  & p {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: $colortextB;
+    margin-left: -35px;
+    margin-right: -70px;
+  }
+}
+
+.activeboder {
+  border: 3px solid $colorRed;
+}
+
+.footer--header {
+  & i {
+    font-size: 2rem;
+    font-weight: 600;
+    color: $iconcolor;
+  }
+}
+.footer__body--item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 25px 0px 24px 62px;
+  & p {
+    font-size: 1.2rem;
+    color: $colortextB;
+    font-weight: 800;
+    width: 84px;
+    margin: 0px 40px 0 30px;
+  }
+  & i {
+    font-size: 1.8rem;
+    color: $iconcolor;
+    font-weight: 600;
+    margin-right: -16px;
+  }
+  & img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+.fixlocation {
+  justify-content: flex-start;
+  margin-left: 60px;
+}
+.footer--footer {
+  padding: 15px 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top: 2px solid $iconcolor;
+
+  & p {
+    font-size: 1.4rem;
+    color: $colortextl;
+    font-weight: 800;
+    & span {
+      font-size: 1.4rem;
+      color: $colortextB;
+      margin: 14px 0;
+      display: block;
+    }
+  }
+  & i {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $iconcolor;
+  }
+
+  & .pause {
+    background: #27e219;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    & i {
+      color: #fff;
+      font-size: 1.6rem;
+      position: absolute;
+      top: 8px;
+      left: 12px;
+    }
+  }
+}
+.fixmr {
+  margin-left: 10px !important;
+}
+.fixp {
+  margin-left: -10px;
+  font-size: 1.2rem;
+  color: $colortextB;
+  font-weight: 800;
+  display: block;
+}
+
+.js-btnadd {
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.4);
+  }
+}
+.open {
+  display: block;
+}
+.close {
+  display: none;
+}

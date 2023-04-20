@@ -1,0 +1,36 @@
+*{
+ 
+    box-sizing:  inherit;/* ke thua tu the html co thuoc tinh boderbox*/
+    margin: 0 ;
+    padding: 0;
+}
+
+html{
+    font-size: 62.5%;/*1px = 1rem trick mod %*/
+    line-height: 1.6rem; /*= 16px */
+    font-family: 'Roboto', sans-serif; /* chon font , nhung font roboto */
+    box-sizing: border-box; /* set up chinh kich thuoc element trong box */
+}
+
+li{
+    list-style-type: none;
+    cursor: pointer;
+}
+
+
+
+a{
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: #678394;
+    font-weight: 600;
+}
+input {
+     outline: none;
+     border: none;
+     width: 100%;
+     font-size: 1.2em;
+
+}
+
+
