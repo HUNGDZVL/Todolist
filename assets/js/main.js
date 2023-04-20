@@ -50,36 +50,47 @@ function handleClickbtnAdds() {
         getDataAndAddData();
 
         // getdata localstroage
-        const infoData = JSON.parse(localStorage.getItem("data"));
+        // const infoData = JSON.parse(localStorage.getItem("data"));
+        // console.log(infoData.length);
         // kiem tra value in localstogra
-        if (infoData) {
-          const blDivv = document.createElement("div");
-          blDivv.className = "content__item--child";
-          const htmlss = infoData.map((item) => {
-            return `
-                    <div class="item__child">
+        //show Item When Click Add
+        console.log(blItem);
+        const valuetext = blItem.querySelector(".input-js").value;
+        const valuefile = blItem.querySelector(".file-js");
+
+        if (valuefile.files.length === 0 || valuetext === "") {
+          alert("Please entry information!");
+        } else {
+          let filess = valuefile.files[0].name;
+          let info = {
+            content: valuetext,
+            path: "./assets/img/" + filess,
+          };
+          console.log(info);
+
+          const blDivvv = document.createElement("div");
+          blDivvv.className = "content__item--child";
+
+          let htmlsss = `
+           <div class="item__child">
                     <i class="iconR fa-solid fa-trash js-trash"></i>
                       <div class="textimg">
                           <p>Space Task2</p>
-                            
-                            <img src="${item.path}" alt="avt">
+
+                            <img src="${info.path}" alt="avt">
                         </div>
-                        <p class="text--item">${item.content}</p>
+                        <p class="text--item">${info.content}</p>
                     </div>
-
         `;
-          });
-          blDivv.innerHTML = htmlss.join("");
 
-          blItem.appendChild(blDivv);
-        } else {
-          alert("data null");
+          blDivvv.innerHTML = htmlsss;
+          blItem.appendChild(blDivvv);
         }
         resetInput();
         //call function
 
         clearItem(); // remove
-        reloadPageAfterDelay(20);
+        // reloadPageAfterDelay(20);
       });
 
       // ngăn even close nổi bọt lên form
@@ -95,6 +106,7 @@ function handleClickbtnAdds() {
     });
   }
 }
+
 //get data and inport data inblock
 function getDataAndAddData() {
   const valueInputtext = $(".input-js").value;
@@ -170,12 +182,11 @@ function showReload() {
   if (infoData.length > 0) {
     let address;
     let contentid;
-    let pathid
+    let pathid;
     for (let i = 0; i < infoData.length; i++) {
       address = infoData[i].adress;
       contentid = infoData[i].content;
       pathid = infoData[i].path;
-      
 
       const allP = $$("p");
 
@@ -191,9 +202,12 @@ function showReload() {
         const blDivv = document.createElement("div");
         blDivv.className = "content__item--child";
         const htmlss = infoData.map((item) => {
-          if(item.adress===address && item.path===pathid && item.content===contentid){
-           
-          return `
+          if (
+            item.adress === address &&
+            item.path === pathid &&
+            item.content === contentid
+          ) {
+            return `
                     <div class="item__child">
                     <i class="iconR fa-solid fa-trash js-trash"></i>
                       <div class="textimg">
@@ -205,7 +219,8 @@ function showReload() {
                     </div>
 
         `;
-        }});
+          }
+        });
         blDivv.innerHTML = htmlss.join("");
 
         addr.appendChild(blDivv);
