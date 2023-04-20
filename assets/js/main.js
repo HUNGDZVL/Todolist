@@ -187,4 +187,5 @@ function showReload() {
   } else {
     alert("data null");
   }
+   clearItem();
 }
