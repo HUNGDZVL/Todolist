@@ -8,6 +8,8 @@ const blockbtnAdds = $$(".content__item--add");
 function start() {
   //click +
   handleClickbtnAdds();
+  //reload khong mat data
+  showReload();
 }
 
 start();
@@ -49,27 +51,32 @@ function handleClickbtnAdds() {
 
         // getdata localstroage
         const infoData = JSON.parse(localStorage.getItem("data"));
-        const blDivv = document.createElement("div");
-        blDivv.className = "content__item--child";
-        const htmlss = `
+        // kiem tra value in localstogra
+        if (infoData) {
+          const blDivv = document.createElement("div");
+          blDivv.className = "content__item--child";
+          const htmlss = infoData.map((item) => {
+            return `
                     <div class="item__child">
                     <i class="iconR fa-solid fa-trash js-trash"></i>
                       <div class="textimg">
                           <p>Space Task2</p>
                             
-                            <img src="${infoData.path}" alt="avt">
+                            <img src="${item.path}" alt="avt">
                         </div>
-                        <p class="text--item">${infoData.content}</p>
+                        <p class="text--item">${item.content}</p>
                     </div>
 
         `;
-        blDivv.innerHTML = htmlss;
+          });
+          blDivv.innerHTML = htmlss.join("");
 
-        blItem.appendChild(blDivv);
-        //reset data input
+          blItem.appendChild(blDivv);
+        } else {
+          alert("data null");
+        }
         resetInput();
         //call function
-        // localStorage.setItem("data", JSON.stringify(null));
 
         clearItem();
       });
@@ -87,22 +94,30 @@ function handleClickbtnAdds() {
     });
   }
 }
-
-//render item out list
-
 //get data and inport data inblock
 function getDataAndAddData() {
   const valueInputtext = $(".input-js").value;
   const valueInputfile = $(".file-js");
 
+  const btnbutton = $("button");
+  // lấy địa chỉ của khối chứa nó
+  let blbtn = btnbutton.parentNode.parentNode;
+  let childbl = blbtn.querySelector(
+    ".content__item--add p:first-of-type"
+  ).textContent;
   if (valueInputfile.files.length === 0 || valueInputtext === "") {
     alert("Please entry information!");
   } else {
     let file = valueInputfile.files[0].name;
-    var information = {
+    var newinfomation = {
       content: valueInputtext,
       path: "./assets/img/" + file,
+      adress: childbl,
     };
+
+    var information = [];
+
+    information.push(newinfomation);
     // set data in local storage
     localStorage.setItem("data", JSON.stringify(information));
   }
@@ -123,6 +138,7 @@ function clearItem() {
       const itemtrash = e.target.parentNode.parentNode;
 
       blItemtrash.removeChild(itemtrash);
+      localStorage.setItem("data", JSON.stringify(null));
     });
   }
 }
@@ -133,4 +149,42 @@ function resetInput() {
   focusInput.focus();
   let chosenInput = $(".file-js");
   chosenInput.value = "";
+}
+
+function showReload() {
+  const infoData = JSON.parse(localStorage.getItem("data"));
+  let address = infoData[0].adress;
+
+  const allP = $$("p");
+  let addr;
+  for (let i = 0; i < allP.length; i++) {
+    if (allP[i].textContent === address) {
+      addr = allP[i].parentNode.parentNode;
+      break;
+    }
+  }
+  // kiem tra value in localstogra
+  if (infoData) {
+    const blDivv = document.createElement("div");
+    blDivv.className = "content__item--child";
+    const htmlss = infoData.map((item) => {
+      return `
+                    <div class="item__child">
+                    <i class="iconR fa-solid fa-trash js-trash"></i>
+                      <div class="textimg">
+                          <p>Space Task2</p>
+
+                            <img src="${item.path}" alt="avt">
+                        </div>
+                        <p class="text--item">${item.content}</p>
+                    </div>
+
+        `;
+    });
+    blDivv.innerHTML = htmlss.join("");
+
+    addr.appendChild(blDivv);
+  } else {
+    alert("data null");
+  }
 }
