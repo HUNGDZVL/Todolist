@@ -784,6 +784,7 @@
 
 .content__item--child {
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .item--info {
