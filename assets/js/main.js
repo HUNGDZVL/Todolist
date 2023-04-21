@@ -262,9 +262,9 @@ function showReload() {
                       <div class="textimg">
                           <p>Space Task2</p>
 
-                            <img src="${item.path}" alt="avt">
+                            <img src="${item.path}" class="js--img" alt="avt">
                         </div>
-                        <p class="text--item">${item.content}</p>
+                        <p class="text--item js--content">${item.content}</p>
                     </div>
 
         `;
@@ -308,6 +308,8 @@ function dragAndDrop() {
   //end
   // khi kéo thả hoàn thành thì class đó đi
   document.addEventListener("dragend", (e) => {
+    updatelocalstorage();
+
     e.target.classList.remove("dragging");
   });
   // add event dragover cho từng khối danh sách chưa các item
@@ -324,6 +326,7 @@ function dragAndDrop() {
       } else {
         item.append(dragging); //thêm vào cuối mảng
       }
+
       CountItems(); // update số lượng item
     });
   });
@@ -334,7 +337,9 @@ function dragAndDrop() {
       ".content__item--child:not(.dragging)"
     );
     let result;
-    // lặp qua tât  cả các phần tử con và tính toán vị trí trung tâm của các phần tử, nếu vị trí của phần tư được kéo nhỏ hơn vị trí trung tâm của phần tử đang xét, vị trí của phần tử được kéo được đặt trước phần tử đang xét bằng cách sử dụng phương thức inserAd...
+    // lặp qua tât  cả các phần tử con và tính toán vị trí trung tâm của các phần tử,
+    //nếu vị trí của phần tư được kéo nhỏ hơn vị trí trung tâm của phần tử đang xét,
+    // vị trí của phần tử được kéo được đặt trước phần tử đang xét bằng cách sử dụng phương thức inserAd...
     for (let refer_card of cards) {
       const box = refer_card.getBoundingClientRect();
       const boxCenterY = box.y + box.height / 2;
@@ -342,5 +347,29 @@ function dragAndDrop() {
       if (posY < boxCenterY) result = refer_card;
     }
     return result;
+  }
+}
+
+function updatelocalstorage() {
+  const inputlast = $$('div[draggable="true"]');
+  console.log(inputlast);
+  
+  let datalocalnew = [];
+  
+  for (let i = 0; i < inputlast.length; i++){
+    let datacontent = inputlast[i].querySelector(".js--content");
+    let datatextcontetn = datacontent.textContent;
+    let dataimg = inputlast[i].querySelector(".js--img").src.split("/").pop();
+    let path = inputlast[i].parentNode;
+    let datapath = path.querySelector("p").textContent;
+
+    let newdatalocal = {
+      content: datatextcontetn,
+      path: "./assets/img/" + dataimg,
+      adress: datapath,
+    };
+    datalocalnew.push(newdatalocal);
+    console.log(datalocalnew);
+    localStorage.setItem("data", JSON.stringify(datalocalnew));
   }
 }
