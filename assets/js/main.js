@@ -8,7 +8,6 @@ const blockbtnAdds = $$(".content__item--add"); // lấy tất cả thẻ cha ch
 function start() {
   //gọi hàm nếu click nút +
   handleClickbtnAdds();
-
   //reload lại trình duyệt
   showReload();
   //số lượng item trong danh sách
@@ -102,7 +101,7 @@ function handleClickbtnAdds() {
         resetInput();
         //call function
 
-        // clearItem(); // remove
+         clearItem(); // remove
         // reloadPageAfterDelay(20);
       });
 
@@ -114,6 +113,7 @@ function handleClickbtnAdds() {
       globalForm.addEventListener("click", () => {
         open.classList.add("close");
       });
+      clearItem();
 
       closeFormInput();
     });
@@ -351,23 +351,29 @@ function dragAndDrop() {
 }
 
 function updatelocalstorage() {
+  // lấy các item vừa thêm từ người dùng
   const inputlast = $$('div[draggable="true"]');
   console.log(inputlast);
-  
+
   let datalocalnew = [];
-  
-  for (let i = 0; i < inputlast.length; i++){
+  // duyệt qua tất cả các item vừa tìm được
+  for (let i = 0; i < inputlast.length; i++) {
+    // lấy ra dữ liệu text trong form
     let datacontent = inputlast[i].querySelector(".js--content");
     let datatextcontetn = datacontent.textContent;
+    //lấy ra dữ liệu hình ảnh trong form
     let dataimg = inputlast[i].querySelector(".js--img").src.split("/").pop();
+
+    //lấy ra địa chỉ chưa các item trong form
     let path = inputlast[i].parentNode;
     let datapath = path.querySelector("p").textContent;
-
+    //tao object chứa các item
     let newdatalocal = {
       content: datatextcontetn,
       path: "./assets/img/" + dataimg,
       adress: datapath,
     };
+    //them object vào item
     datalocalnew.push(newdatalocal);
     console.log(datalocalnew);
     localStorage.setItem("data", JSON.stringify(datalocalnew));
