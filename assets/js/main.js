@@ -13,6 +13,8 @@ function start() {
   showReload();
   //số lượng item trong danh sách
   CountItems();
+  // hàm kéo thả
+  dragAndDrop();
 }
 
 start();
@@ -78,7 +80,7 @@ function handleClickbtnAdds() {
 
           const blDivvv = document.createElement("div");
           blDivvv.className = "content__item--child";
-
+          blDivvv.setAttribute("draggable", "true");
           let htmlsss = `
            <div class="item__child">
                     <i class="iconR fa-solid fa-trash js-trash"></i>
@@ -154,8 +156,10 @@ function getDataAndAddData() {
     //   information = [];
     // }
     // thêm dữ liệu từ object vừa lấy từ người dùng và push vào cuối mảng vừa khỏi tạo từ localstorge
+
     information.push(newinfo);
     // thêm lại dữ liệu vào localstorge
+
     localStorage.setItem("data", JSON.stringify(information));
   }
 } // đóng form input
@@ -243,6 +247,7 @@ function showReload() {
         // tạo một thẻ div có class name đã css sẵn
         const blDivv = document.createElement("div");
         blDivv.className = "content__item--child";
+        blDivv.setAttribute("draggable", "true");
         // tạo biến htmls để lưu các giá trị trong localstorage
         const htmlss = infoData.map((item) => {
           // kiểm tra dữ liệu và setup vị trí xuất hiện cho các dữ liệu có trong localstorage
@@ -290,3 +295,52 @@ function CountItems() {
 }
 
 // hàm di chuyển các item trong html
+//get parentchild
+function dragAndDrop() {
+  const columns = $$(".container__content--item");
+  // lấy danh sách phần từ cha chứa các phần tử con
+  // gán hai event drapstart and drapend
+  //start
+  //khi bắt đầu kéo thả thi add một class dragging vô
+  document.addEventListener("dragstart", (e) => {
+    e.target.classList.add("dragging");
+  });
+  //end
+  // khi kéo thả hoàn thành thì class đó đi
+  document.addEventListener("dragend", (e) => {
+    e.target.classList.remove("dragging");
+  });
+  // add event dragover cho từng khối danh sách chưa các item
+  columns.forEach((item) => {
+    item.addEventListener("dragover", (e) => {
+      //khi người dung kéo một phần tử đến vị trí của phần tử đang xét hàm dưới
+      const dragging = document.querySelector(".dragging");
+      // được gọi để xác định vị trí phân tử được kéo so với cấc phần tử khác trong cột
+      const applyAfter = getNewPosition(item, e.clientY);
+
+      //nếu như không có phần tử nào trong cột có vị trí trung tâm lớn hơn vị trí của phần tử được kéo thì phần tử được kéo sẽ được đặt lên đầu côt băng phuong thức prepend
+      if (applyAfter) {
+        applyAfter.insertAdjacentElement("afterend", dragging);
+      } else {
+        item.append(dragging); //thêm vào cuối mảng
+      }
+      CountItems(); // update số lượng item
+    });
+  });
+
+  function getNewPosition(column, posY) {
+    //lấy tất cả phần tử con của cột bằng cach sư dụng $$
+    const cards = column.querySelectorAll(
+      ".content__item--child:not(.dragging)"
+    );
+    let result;
+    // lặp qua tât  cả các phần tử con và tính toán vị trí trung tâm của các phần tử, nếu vị trí của phần tư được kéo nhỏ hơn vị trí trung tâm của phần tử đang xét, vị trí của phần tử được kéo được đặt trước phần tử đang xét bằng cách sử dụng phương thức inserAd...
+    for (let refer_card of cards) {
+      const box = refer_card.getBoundingClientRect();
+      const boxCenterY = box.y + box.height / 2;
+
+      if (posY < boxCenterY) result = refer_card;
+    }
+    return result;
+  }
+}
