@@ -121,8 +121,8 @@ function handleClickbtnAdds() {
 
       closeFormInput();
 
-      editText();
     });
+    editText();
   }
 }
 
