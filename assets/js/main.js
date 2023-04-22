@@ -120,6 +120,8 @@ function handleClickbtnAdds() {
       clearItem();
 
       closeFormInput();
+
+      editText();
     });
   }
 }
@@ -388,6 +390,8 @@ function updatelocalstorage() {
 function editText() {
   const iconEdits = $$(".edit-js");
   for (let icon of iconEdits) {
+    const countinput = 1;// check số lượng input edit
+
     icon.addEventListener("click", (e) => {
       let blockIcon = e.target.parentNode.parentNode;
       // lấy p chứa content edit
@@ -396,13 +400,22 @@ function editText() {
       let inputEdit = document.createElement("input");
       inputEdit.setAttribute("type", "text");
       inputEdit.setAttribute("class", "inputedit");
+      // gán value input là nội dung của text contetn
       inputEdit.setAttribute("value", Ptext.textContent);
-      blockIcon.appendChild(inputEdit);
+      // giới hạn thể input được thêm
+      let numinput = 0;
+      // check xem có thẻ inputedit chưa nếu chưa có thì cho phép thêm thẻ input
+      if (numinput < countinput) {
+        blockIcon.appendChild(inputEdit);//them thẻ input vào block item
+        // đặt số thẻ input là 1 để không cho thêm thẻ input nào nữa
+        numinput = blockIcon.querySelector(".inputedit").length
+      }
 
-      // hidden inputEdit
+      // ẩn text contetn đi 
       Ptext.style.display = "none";
+      // hiện inpuedit ra 
       inputEdit.style.display = "block";
-      //focus input
+      //focus inputedi để sửa nội dung của text content, focus vào cuối value
       inputEdit.selectionEnd = inputEdit.value.length;
       inputEdit.focus();
 
@@ -414,6 +427,7 @@ function editText() {
           Ptext.textContent = inputEdit.value;
           inputEdit.style.display = "none";
           Ptext.style.display = "inline-block";
+          //update dữ liệu
           updatelocalstorage();
         }
       });
