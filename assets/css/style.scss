@@ -743,7 +743,7 @@ $colorRed: #f42323;
     cursor: pointer;
     color: $iconcolor;
     font-size: 1.2rem;
-    &:hover{
+    &:hover {
       transform: scale(1.2);
     }
   }
@@ -790,6 +790,28 @@ $colorRed: #f42323;
     font-weight: 800;
     color: $colortextB;
   }
+}
+.edit-js {
+  position: absolute;
+  display: block;
+  right: 60px;
+  top: 10px;
+  color: $iconcolor;
+  cursor: pointer;
+  transition: transform linear 0.1s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.inputedit {
+  display: none;
+  position: relative;
+  
+  padding: 0 10px 10px;
+  color: $colortextl;
+  font-weight: 800;
+  width: 180px;
 }
 .btnsave {
   width: 40px;

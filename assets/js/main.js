@@ -14,6 +14,8 @@ function start() {
   CountItems();
   // hàm kéo thả
   dragAndDrop();
+  //edit content
+  editText();
 }
 
 start();
@@ -83,6 +85,8 @@ function handleClickbtnAdds() {
           let htmlsss = `
            <div class="item__child">
                     <i class="iconR fa-solid fa-trash js-trash"></i>
+                    <div class="edit-js"><i class="fa-solid fa-pen"></i></div>
+
                       <div class="textimg">
                           <p>Space Task2</p>
 
@@ -99,10 +103,10 @@ function handleClickbtnAdds() {
 
         //reset innput sau khi add
         resetInput();
-        //call function
 
-         clearItem(); // remove
+        clearItem(); // remove
         // reloadPageAfterDelay(20);
+        editText();
       });
 
       // ngăn even close nổi bọt lên form
@@ -258,6 +262,7 @@ function showReload() {
           ) {
             return `
                     <div class="item__child">
+                     <div class="edit-js"><i class="fa-solid fa-pen"></i></div>
                     <i class="iconR fa-solid fa-trash js-trash"></i>
                       <div class="textimg">
                           <p>Space Task2</p>
@@ -377,5 +382,41 @@ function updatelocalstorage() {
     datalocalnew.push(newdatalocal);
     console.log(datalocalnew);
     localStorage.setItem("data", JSON.stringify(datalocalnew));
+  }
+}
+
+function editText() {
+  const iconEdits = $$(".edit-js");
+  for (let icon of iconEdits) {
+    icon.addEventListener("click", (e) => {
+      let blockIcon = e.target.parentNode.parentNode;
+      // lấy p chứa content edit
+      let Ptext = blockIcon.querySelector(".js--content");
+      // them inputedit vao the p
+      let inputEdit = document.createElement("input");
+      inputEdit.setAttribute("type", "text");
+      inputEdit.setAttribute("class", "inputedit");
+      inputEdit.setAttribute("value", Ptext.textContent);
+      blockIcon.appendChild(inputEdit);
+
+      // hidden inputEdit
+      Ptext.style.display = "none";
+      inputEdit.style.display = "block";
+      //focus input
+      inputEdit.selectionEnd = inputEdit.value.length;
+      inputEdit.focus();
+
+      // Cho phép người dùng sửa đổi đoạn văn bản trong phần tử input
+      inputEdit.addEventListener("keydown", function (event) {
+        if (event.keyCode === 13) {
+          // Kiểm tra nếu người dùng nhấn phím Enter
+          // Cập nhật đoạn văn bản trong thẻ p và ẩn phần tử input
+          Ptext.textContent = inputEdit.value;
+          inputEdit.style.display = "none";
+          Ptext.style.display = "inline-block";
+          updatelocalstorage();
+        }
+      });
+    });
   }
 }
