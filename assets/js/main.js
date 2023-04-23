@@ -30,7 +30,8 @@ function handleClickbtnAdds() {
   //tạo đoạn code html
   let htmls = `
     <input type="text" placeholder = "content..." class="input-js"/>
-    <input type ="file" class = "file-js"/>
+    <input type ="file" class = "file-js" value = "child2.avif"/>
+    
     <button>add</button>
     <div id="close">
     <i class="fa-solid fa-xmark"></i>
@@ -90,7 +91,7 @@ function handleClickbtnAdds() {
                       <div class="textimg">
                           <p>Space Task2</p>
 
-                            <img src="${info.path}" alt="avt">
+                            <img src="${info.path}" alt="avt" class="js--img">
                         </div>
                         <p class="text--item">${info.content}</p>
                     </div>
@@ -364,7 +365,7 @@ function updatelocalstorage() {
   // duyệt qua tất cả các item vừa tìm được
   for (let i = 0; i < inputlast.length; i++) {
     // lấy ra dữ liệu text trong form
-    let datacontent = inputlast[i].querySelector(".js--content");
+    let datacontent = inputlast[i].querySelector(".text--item");
     let datatextcontetn = datacontent.textContent;
     //lấy ra dữ liệu hình ảnh trong form
     let dataimg = inputlast[i].querySelector(".js--img").src.split("/").pop();
@@ -404,8 +405,8 @@ function editText() {
       // giới hạn thể input được thêm
       // check xem có thẻ inputedit chưa nếu chưa có thì cho phép thêm thẻ input
       const checkinput = $(".inputedit");
-      console.log(checkinput);
-      if (!checkinput) { // check xem co input hay khong neu khong co thi moi them
+      if (!checkinput) {
+        // check xem co input hay khong neu khong co thi moi them
         blockIcon.appendChild(inputEdit); //them thẻ input vào block item
       }
       // ẩn text contetn đi
@@ -424,9 +425,10 @@ function editText() {
           inputEdit.style.display = "none";
           Ptext.style.display = "inline-block";
           //update dữ liệu
-          updatelocalstorage();
         }
+        updatelocalstorage();
       });
+      console.log("fix");
     });
   }
 }
