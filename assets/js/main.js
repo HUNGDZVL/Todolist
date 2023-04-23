@@ -99,6 +99,7 @@ function handleClickbtnAdds() {
           blDivvv.innerHTML = htmlsss;
           blItem.appendChild(blDivvv);
           setTimeout(CountItems(), 100);
+          editText();
         }
 
         //reset innput sau khi add
@@ -106,7 +107,6 @@ function handleClickbtnAdds() {
 
         clearItem(); // remove
         // reloadPageAfterDelay(20);
-        editText();
       });
 
       // ngăn even close nổi bọt lên form
@@ -120,9 +120,7 @@ function handleClickbtnAdds() {
       clearItem();
 
       closeFormInput();
-
     });
-    editText();
   }
 }
 
@@ -390,35 +388,33 @@ function updatelocalstorage() {
 function editText() {
   const iconEdits = $$(".edit-js");
   for (let icon of iconEdits) {
-    const countinput = 1;// check số lượng input edit
+    // const countinput = 1; // check số lượng input edit
 
     icon.addEventListener("click", (e) => {
       let blockIcon = e.target.parentNode.parentNode;
-      // lấy p chứa content edit
-      let Ptext = blockIcon.querySelector(".js--content");
+      //lấy p chứa content edit
+      let Ptext = blockIcon.querySelector(".text--item");
       // them inputedit vao the p
+
       let inputEdit = document.createElement("input");
       inputEdit.setAttribute("type", "text");
       inputEdit.setAttribute("class", "inputedit");
       // gán value input là nội dung của text contetn
       inputEdit.setAttribute("value", Ptext.textContent);
       // giới hạn thể input được thêm
-      let numinput = 0;
       // check xem có thẻ inputedit chưa nếu chưa có thì cho phép thêm thẻ input
-      if (numinput < countinput) {
-        blockIcon.appendChild(inputEdit);//them thẻ input vào block item
-        // đặt số thẻ input là 1 để không cho thêm thẻ input nào nữa
-        numinput = blockIcon.querySelector(".inputedit").length
+      const checkinput = $(".inputedit");
+      console.log(checkinput);
+      if (!checkinput) { // check xem co input hay khong neu khong co thi moi them
+        blockIcon.appendChild(inputEdit); //them thẻ input vào block item
       }
-
-      // ẩn text contetn đi 
+      // ẩn text contetn đi
       Ptext.style.display = "none";
-      // hiện inpuedit ra 
+      // hiện inpuedit ra
       inputEdit.style.display = "block";
       //focus inputedi để sửa nội dung của text content, focus vào cuối value
       inputEdit.selectionEnd = inputEdit.value.length;
       inputEdit.focus();
-
       // Cho phép người dùng sửa đổi đoạn văn bản trong phần tử input
       inputEdit.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
