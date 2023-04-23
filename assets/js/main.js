@@ -30,8 +30,19 @@ function handleClickbtnAdds() {
   //tạo đoạn code html
   let htmls = `
     <input type="text" placeholder = "content..." class="input-js"/>
-    <input type ="file" class = "file-js" value = "child2.avif"/>
+ 
     
+    <input type="text" list="avts" class = "file-js" placeholder = "chosen..." >
+      <datalist id="avts">
+        <option value="avt1.png">
+        <option value="avt2.avif">
+        <option value="avt3.avif">
+        <option value="avt4.avif">
+        <option value="avt5.avif">
+        <option value="child1.avif">
+
+      </datalist>
+
     <button>add</button>
     <div id="close">
     <i class="fa-solid fa-xmark"></i>
@@ -68,13 +79,13 @@ function handleClickbtnAdds() {
 
         // lấy dữ liệu trong form input
         const valuetext = blItem.querySelector(".input-js").value;
-        const valuefile = blItem.querySelector(".file-js");
+        const valuefile = blItem.querySelector(".file-js").value;
 
         //kiểm tra dữ liệu và in ra trình duyệt
-        if (valuefile.files.length === 0 || valuetext === "") {
+        if (valuefile === "" || valuetext === "") {
           alert("Please entry information!");
         } else {
-          let filess = valuefile.files[0].name;
+          let filess = valuefile;
           let info = {
             content: valuetext,
             path: "./assets/img/" + filess,
@@ -129,7 +140,8 @@ function handleClickbtnAdds() {
 function getDataAndAddData() {
   // lấy dữ liệu hai thẻ input
   const valueInputtext = $(".input-js").value;
-  const valueInputfile = $(".file-js");
+  const valueInputfile = $(".file-js").value;
+  console.log(valueInputfile.value);
 
   const btnbutton = $("button");
   // lấy địa chỉ của khối cha chứa button
@@ -140,11 +152,11 @@ function getDataAndAddData() {
   ).textContent;
 
   // kiểm tra dữ liệu người dùng nếu nhập thiếu 1 trong 2 cái sẽ cảnh báo
-  if (valueInputfile.files.length === 0 || valueInputtext === "") {
+  if (valueInputfile === "" || valueInputtext === "") {
     alert("Please entry information!");
   } else {
     // thêm dữ liệu người dùng vừa nhập vào object
-    let file = valueInputfile.files[0].name;
+    let file = valueInputfile;
     let newinfo = {
       content: valueInputtext,
       path: "./assets/img/" + file,

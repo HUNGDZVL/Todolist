@@ -541,9 +541,13 @@ $colorRed: #f42323;
       }
     }
     & .file-js {
-      font-size: 0.9rem;
-      padding-left: 9px;
-      width: 133px;
+      font-size: 1.2rem;
+      padding-left: 12px;
+      width: 76px;
+      margin-right: 58px;
+      &:hover{
+        cursor: pointer;
+      }
     }
   }
 }
@@ -807,7 +811,7 @@ $colorRed: #f42323;
 .inputedit {
   display: none;
   position: relative;
-  
+
   padding: 0 10px 10px;
   color: $colortextl;
   font-weight: 800;
