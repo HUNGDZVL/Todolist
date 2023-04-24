@@ -412,9 +412,9 @@ function editText() {
       // gán value input là nội dung của text contetn
       inputEdit.setAttribute("value", Ptext.textContent);
       // giới hạn thể input được thêm
-
+      const checkinput = $(".inputedit");
       blockIcon.appendChild(inputEdit); //them thẻ input vào block item
-      // ẩn text contetn đi
+
       Ptext.style.display = "none";
       // hiện inpuedit ra
       inputEdit.style.display = "block";
@@ -428,7 +428,7 @@ function editText() {
           // Cập nhật đoạn văn bản trong thẻ p và ẩn phần tử input
           Ptext.textContent = inputEdit.value;
           inputEdit.style.display = "none";
-          Ptext.style.display = "inline-block";
+          Ptext.style.display = "block";
           //update dữ liệu
         }
         updatelocalstorage();

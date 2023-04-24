@@ -985,8 +985,21 @@ $colorRed: #f42323;
       border-radius: 8px;
       bottom: 42px;
       left: 26px;
+      animation: fadeIn ease-in 0.2s;
+      transition: transform ease-in-out 0.2s;
       
     }
+  }
+}
+
+@keyframes fadeIN{
+  from{
+    transform: translateY(-10px);
+    opacity: 0.4;
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
 
