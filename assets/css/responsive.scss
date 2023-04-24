@@ -110,6 +110,13 @@
   .fixp {
     margin-left: -2px;
   }
+  #div-js {
+    width: 241px !important;
+    left: 27px !important;
+    & button {
+      margin-left: 66px!important;
+    }
+  }
 }
 @media (max-width: 740px) {
   .header__menu {
@@ -156,9 +163,12 @@
   .container__content {
     margin-left: 42px;
     padding: 0 4px;
-    max-width: 380px
+    max-width: 380px;
   }
   .container__content--item {
     margin-left: -8px;
+  }
+  #div-js{
+    left: 80px !important;
   }
 }

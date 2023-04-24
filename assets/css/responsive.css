@@ -101,6 +101,13 @@
   .fixp {
     margin-left: -2px;
   }
+  #div-js {
+    width: 241px !important;
+    left: 27px !important;
+  }
+  #div-js button {
+    margin-left: 66px !important;
+  }
 }
 @media (max-width: 740px) {
   .header__menu {
@@ -151,5 +158,8 @@
   }
   .container__content--item {
     margin-left: -8px;
+  }
+  #div-js {
+    left: 80px !important;
   }
 }/*# sourceMappingURL=responsive.css.map */

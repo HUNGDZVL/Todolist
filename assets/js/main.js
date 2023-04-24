@@ -415,10 +415,8 @@ function editText() {
       // gán value input là nội dung của text contetn
       inputEdit.setAttribute("value", Ptext.textContent);
       // giới hạn thể input được thêm
-      // check xem có thẻ inputedit chưa nếu chưa có thì cho phép thêm thẻ input
-      const checkinput = $(".inputedit");
-        // check xem co input hay khong neu khong co thi moi them
-        blockIcon.appendChild(inputEdit); //them thẻ input vào block item
+
+      blockIcon.appendChild(inputEdit); //them thẻ input vào block item
       // ẩn text contetn đi
       Ptext.style.display = "none";
       // hiện inpuedit ra
@@ -438,7 +436,6 @@ function editText() {
         }
         updatelocalstorage();
       });
-      console.log("fix");
     });
   }
 }
