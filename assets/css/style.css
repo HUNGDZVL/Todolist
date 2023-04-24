@@ -375,6 +375,9 @@
   font-size: 1.4rem;
   color: #cdcbcb;
 }
+.contact--icon:hover {
+  cursor: pointer;
+}
 
 .info__contact--img {
   top: 20px;

@@ -141,7 +141,6 @@ function getDataAndAddData() {
   // lấy dữ liệu hai thẻ input
   const valueInputtext = $(".input-js").value;
   const valueInputfile = $(".file-js").value;
-  console.log(valueInputfile.value);
 
   const btnbutton = $("button");
   // lấy địa chỉ của khối cha chứa button
@@ -371,7 +370,6 @@ function dragAndDrop() {
 function updatelocalstorage() {
   // lấy các item vừa thêm từ người dùng
   const inputlast = $$('div[draggable="true"]');
-  console.log(inputlast);
 
   let datalocalnew = [];
   // duyệt qua tất cả các item vừa tìm được
@@ -393,7 +391,6 @@ function updatelocalstorage() {
     };
     //them object vào item
     datalocalnew.push(newdatalocal);
-    console.log(datalocalnew);
     localStorage.setItem("data", JSON.stringify(datalocalnew));
   }
 }
@@ -439,3 +436,23 @@ function editText() {
     });
   }
 }
+
+//export file xlsx
+
+const exportButton = document.getElementById("js-export");
+
+exportButton.addEventListener("click", () => {
+  // Lấy dữ liệu từ LocalStorage và chuyển đổi sang định dạng dữ liệu của thư viện xlsx
+  const dataExport = JSON.parse(localStorage.getItem("data"));
+  console.log(dataExport);
+
+  const workbook = XLSX.utils.book_new();
+  // tạo bảng tính mới bằng xlsx
+  const worksheet = XLSX.utils.json_to_sheet(dataExport);
+  XLSX.utils.book_append_sheet(workbook, worksheet, "My Sheet");
+  //tạo file chứa data
+  const fileName = "myData.xlsx";
+  //ghi dữ liệu vô file
+  XLSX.writeFile(workbook, fileName);
+  // Tạo sự kiện click cho nút xuất file Excel
+});

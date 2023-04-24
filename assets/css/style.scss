@@ -282,6 +282,9 @@ $colorRed: #f42323;
 
 .contact--icon {
   @include roundbtn();
+  &:hover{
+    cursor: pointer;
+  }
 }
 .info__contact--img {
   top: 20px;

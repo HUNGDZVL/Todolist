@@ -18,6 +18,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <!-- import xlsx -->
    
     <link rel="stylesheet" href="./assets/css/base.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
@@ -133,7 +136,7 @@
                 <div class="contact--icon">
                   <i class="fa-solid fa-user"></i>
                 </div>
-                <div class="contact--icon">
+                <div class="contact--icon" id="js-export">
                   <i class="fa-solid fa-ellipsis"></i>
                 </div>
               </div>
@@ -597,6 +600,6 @@
         </div>
       </div>
     </div>
-    <script src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
   </body>
 </html>
