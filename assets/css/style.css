@@ -1098,4 +1098,19 @@
 
 .close {
   display: none;
+}
+
+#js-export:hover::before {
+  content: "download";
+  display: block;
+  position: absolute;
+  width: 46px;
+  padding-left: 4px;
+  padding-right: 2px;
+  height: 17px;
+  color: #fff;
+  background-color: #417ed9;
+  border-radius: 8px;
+  bottom: 42px;
+  left: 26px;
 }/*# sourceMappingURL=style.css.map */
