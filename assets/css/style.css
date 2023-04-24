@@ -678,6 +678,15 @@
 .container__content--item #div-js .file-js:hover {
   cursor: pointer;
 }
+.container__content--item #div-js .file-js select {
+  -webkit-appearance: none; /* dành cho Safari */
+  -moz-appearance: none; /* dành cho Firefox */
+  appearance: none;
+  background-image: url("arrow.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  padding-right: 20px;
+}
 
 #close {
   position: absolute;
