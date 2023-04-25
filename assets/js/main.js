@@ -16,6 +16,8 @@ function start() {
   dragAndDrop();
   //edit content
   editText();
+  // click vô items
+  handleClickItem();
 }
 
 start();
@@ -71,12 +73,6 @@ function handleClickbtnAdds() {
         const blItem = e.target.parentNode.parentNode;
         getDataAndAddData(); // gọi hàm lấy dữ liệu
 
-        // getdata localstroage
-        // const infoData = JSON.parse(localStorage.getItem("data"));
-        // console.log(infoData.length);
-        // kiem tra value in localstogra
-        //show Item When Click Add
-
         // lấy dữ liệu trong form input
         const valuetext = blItem.querySelector(".input-js").value;
         const valuefile = blItem.querySelector(".file-js").value;
@@ -95,28 +91,28 @@ function handleClickbtnAdds() {
           blDivvv.className = "content__item--child";
           blDivvv.setAttribute("draggable", "true");
           let htmlsss = `
-           <div class="item__child">
+           <div class="item__child item__childss">
                     <i class="iconR fa-solid fa-trash js-trash"></i>
                     <div class="edit-js"><i class="fa-solid fa-pen"></i></div>
 
-                      <div class="textimg">
+                      <div class="textimg ">
                           <p>Space Task2</p>
 
                             <img src="${info.path}" alt="avt" class="js--img">
                         </div>
-                        <p class="text--item">${info.content}</p>
+                        <p class="text--item js--content">${info.content}</p>
                     </div>
         `;
 
           blDivvv.innerHTML = htmlsss;
           blItem.appendChild(blDivvv);
           setTimeout(CountItems(), 100);
+          handleClickItem();
           editText();
         }
 
         //reset innput sau khi add
         resetInput();
-
         clearItem(); // remove
         // reloadPageAfterDelay(20);
       });
@@ -165,13 +161,6 @@ function getDataAndAddData() {
     let information = localStorage.getItem("data")
       ? JSON.parse(localStorage.getItem("data"))
       : [];
-    // let information = [];
-    // if (localStorage.getItem("data")) {
-    //   information = JSON.parse(localStorage.getItem("data"));
-    // } else{
-    //   information = [];
-    // }
-    // thêm dữ liệu từ object vừa lấy từ người dùng và push vào cuối mảng vừa khỏi tạo từ localstorge
 
     information.push(newinfo);
     // thêm lại dữ liệu vào localstorge
@@ -273,7 +262,7 @@ function showReload() {
             item.content === contentid
           ) {
             return `
-                    <div class="item__child">
+                    <div class="item__child item__childss">
                      <div class="edit-js"><i class="fa-solid fa-pen"></i></div>
                     <i class="iconR fa-solid fa-trash js-trash"></i>
                       <div class="textimg">
@@ -456,3 +445,155 @@ exportButton.addEventListener("click", () => {
   XLSX.writeFile(workbook, fileName);
   // Tạo sự kiện click cho nút xuất file Excel
 });
+
+function handleClickItem() {
+  const Items = $$(".item__childss");
+
+  const editJSs = $$(".edit-js");
+  editJSs.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  });
+
+  const removes = $$(".iconR");
+  removes.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  });
+
+  closeFormInput.addEventListener;
+  for (let item of Items) {
+    //duyệt qua tất cả cac item
+    item.addEventListener("click", (e) => {
+      let valueInput = {}; //datalocal
+
+      e.stopPropagation();
+      // mở form
+      const global = $(".app");
+      const divForm = document.createElement("div");
+      divForm.setAttribute("class", "modal__Description");
+      const htmlForm = `
+         
+      <div class="modal__overlay"></div>
+      <div class="modal__body">
+       <div class="auth__form">
+         <div class="modal__header">
+          <p class="textTask">Task1</p>      
+          <p class="textTable">In the Table </p>   
+          <div class="textclose">
+            <i class="fa-solid fa-caret-down"></i>
+            <i class="fa-solid fa-circle-xmark" id="closeMD"></i>
+          </div> 
+        </div>
+        <div class="modal__container">
+          <input type="text" placeholder="enter to submit description...." class="des" >
+        </div>
+        <div class="modal__footer">
+          <p class="footet__cmt">Comment</p>
+          <label for="avt" id="avt">
+            <img src="./assets/img/avt1.png" alt="" class="imgmd" srcset="">
+          
+          <input type="text" placeholder="enter to submit comment...." class="cmt">
+          <div class="sent">
+            <!-- <i class="fa-solid fa-paper-plane"></i> -->
+          </div>
+          </label>
+          <div class ="textCmt"></div>
+
+        </div>
+       </div>
+
+      </div>
+    
+     `;
+      divForm.innerHTML = htmlForm;
+      global.appendChild(divForm);
+
+      // xử lý form
+      const FormInput = $(".modal__Description");
+      const closeFormInput = $(".modal__overlay");
+
+      // đóng form
+      const closeicon = $("#closeMD");
+      closeFormInput.addEventListener("click", (e) => {
+          localStorage.setItem("dataInput", JSON.stringify(valueinputForm));
+        showReloadForm();
+        global.removeChild(divForm);
+      });
+      closeicon.addEventListener("click", (e) => {
+          localStorage.setItem("dataInput", JSON.stringify(valueinputForm));
+        showReloadForm();
+        global.removeChild(divForm);
+      });
+
+      // xử lí giao diện form
+      let blItems = e.target.parentNode;
+      let BLItems = e.target.parentNode.parentNode.parentNode;
+      let imgItems = blItems.querySelector(".js--img");
+      let typeImg = imgItems.src.split("/").pop(); //img
+      let contentitems = blItems.querySelector(".js--content").textContent; //textcontent
+      let TextBlitem = BLItems.querySelector(
+        ".facet-list p:first-of-type"
+      ).textContent; //textBlockItem
+
+      //thay đổi content Form
+      let textTask = $(".textTask");
+      textTask.textContent = contentitems;
+      let textTable = $(".textTable");
+      textTable.textContent = TextBlitem;
+      let imgForm = $(".imgmd");
+      imgForm.setAttribute("src", "./assets/img/" + typeImg);
+
+      // xử lí input 1
+      const input1 = $(".des");
+      const input2 = $(".cmt");
+      input1.addEventListener("keydown", (e) => {
+        if (e.keyCode === 13 && input1.value !== "") {
+          let valuedes = e.target.value;
+          input1.style.fontSize = "1.4rem";
+          input1.style.fontWeight = "800";
+          input2.focus();
+          input1.setAttribute("disabled", true);
+
+          valueInput.Des = valuedes;
+        }
+      });
+
+      // xử lí input 2
+      input2.addEventListener("keydown", (e) => {
+        if (e.keyCode === 13 && input2.value !== "") {
+          let valuecmt = e.target.value;
+          let divText = $(".textCmt");
+          let tagP = document.createElement("p");
+          let htmlcmt = `<span>
+          ${valuecmt}
+          </span>
+          `;
+          tagP.innerHTML = htmlcmt;
+          divText.appendChild(tagP);
+
+          valueInput.Cmt = valuecmt;
+          input2.setAttribute("disabled", true);
+          input2.value = "";
+        }
+      });
+      valueInput = {
+        content: contentitems,
+        path: "./assets/img/" + typeImg,
+        adress: TextBlitem,
+      };
+      var valueinputForm = localStorage.getItem("dataInput")
+        ? JSON.parse(localStorage.getItem("dataInput"))
+        : [];
+
+      valueinputForm.push(valueInput);
+    });
+  }
+}
+
+function showReloadForm() {
+  let dataForm = JSON.parse(localStorage.getItem("dataInput"));
+  console.log(dataForm);
+}
