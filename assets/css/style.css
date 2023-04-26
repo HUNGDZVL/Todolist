@@ -1174,7 +1174,7 @@
   cursor: pointer;
   transform: scale(1.1);
 }
-.modal__body .modal__header .textclose i:nth-child(2) {
+.modal__body .modal__header .textclose i:nth-child(1) {
   color: #f42323;
 }
 
@@ -1261,15 +1261,24 @@
   display: flex;
 }
 .textCmt p span {
-  background-color: #cdcbcb;
+  background-color: rgba(214, 211, 211, 0.7333333333);
+  color: black;
   padding: 4px;
-  font-weight: 600;
+  font-weight: 400;
   border-radius: 4px;
   margin-left: 2px;
 }
 .textCmt p img {
   width: 25px;
   height: 25px;
+}
+.textCmt p i {
+  color: red;
+  font-weight: 700;
+}
+.textCmt p i:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .textCmt img {
   margin-right: 24px;

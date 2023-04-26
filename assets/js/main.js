@@ -16,7 +16,7 @@ function start() {
   dragAndDrop();
   //edit content
   editText();
-  // click vô items
+  // click item
   handleClickItem();
 }
 
@@ -106,8 +106,10 @@ function handleClickbtnAdds() {
 
           blDivvv.innerHTML = htmlsss;
           blItem.appendChild(blDivvv);
-          setTimeout(CountItems(), 100);
+          // click item
           handleClickItem();
+          setTimeout(CountItems(), 100);
+
           editText();
         }
 
@@ -209,9 +211,12 @@ function clearItem() {
       blItemtrash.removeChild(itemtrash);
       // cập nhật lại số lượng item
       setTimeout(CountItems(), 100);
+
+      //reset values input sau khi xóa item
     });
   }
 }
+
 // hàm reset lại form input
 function resetInput() {
   let focusInput = $(".input-js");
@@ -488,7 +493,6 @@ function handleClickItem() {
           <p class="textTask">Task1</p>      
           <p class="textTable">In the Table </p>   
           <div class="textclose">
-            <i class="fa-solid fa-caret-down"></i>
             <i class="fa-solid fa-circle-xmark" id="closeMD"></i>
           </div> 
         </div>
@@ -515,7 +519,7 @@ function handleClickItem() {
      `;
       divForm.innerHTML = htmlForm;
       global.appendChild(divForm);
-
+      removeCmt();
       // xử lý form
       const closeFormInput = $(".modal__overlay");
 
@@ -552,7 +556,10 @@ function handleClickItem() {
       let valueinput1 = JSON.parse(localStorage.getItem("datainput1"));
       if (valueinput1) {
         for (let i = 0; i < valueinput1.length; i++) {
-          if (valueinput1[i].name == contentitems) {
+          if (
+            valueinput1[i].name == contentitems &&
+            valueinput1[i].img == typeImg
+          ) {
             input1.value = valueinput1[i].valueinput;
           }
         }
@@ -565,6 +572,7 @@ function handleClickItem() {
             let newdatainput = {
               name: contentitems,
               valueinput: valuedes,
+              img: typeImg,
             };
             let datainputform1 = localStorage.getItem("datainput1")
               ? JSON.parse(localStorage.getItem("datainput1"))
@@ -586,7 +594,10 @@ function handleClickItem() {
 
       if (valueinputform2) {
         for (let i = 0; i < valueinputform2.length; i++) {
-          if (valueinputform2[i].name == contentitems && valueinputform2[i].img == typeImg) {
+          if (
+            valueinputform2[i].name == contentitems &&
+            valueinputform2[i].img == typeImg
+          ) {
             let divTexts = $(".textCmt");
             let tagPs = document.createElement("p");
             let htmlcmts = `
@@ -594,12 +605,13 @@ function handleClickItem() {
             <span>
           ${valueinputform2[i].valueinput2}
           </span>
+          <i class="fa-regular fa-rectangle-xmark closecmt"></i>
           `;
             tagPs.innerHTML = htmlcmts;
             divTexts.appendChild(tagPs);
           }
         }
-      }else{
+      } else {
       }
       input2.addEventListener("keydown", (e) => {
         if (e.keyCode === 13 && input2.value !== "") {
@@ -611,8 +623,7 @@ function handleClickItem() {
             let newdatainput2 = {
               name: contentitems,
               valueinput2: valuecmt,
-              img:typeImg,
-              
+              img: typeImg,
             };
             valueinput2.push(newdatainput2);
             localStorage.setItem("datainput2", JSON.stringify(valueinput2));
@@ -624,19 +635,36 @@ function handleClickItem() {
           <span>
           ${valuecmt}
           </span>
+          <i class="fa-regular fa-rectangle-xmark closecmt"></i>
           `;
           tagP.innerHTML = htmlcmt;
           divText.appendChild(tagP);
-
+          removeCmt();
           valueInput.Cmt = valuecmt;
           input2.value = "";
         }
       });
-      valueInput = {
-        content: contentitems,
-        path: "./assets/img/" + typeImg,
-        adress: TextBlitem,
-      };
     });
   }
+}
+function removeCmt() {
+  setTimeout(() => {
+    // lấy icon remove
+    const closecmts = $$(".closecmt");
+    for (let item of closecmts) {
+      item.addEventListener("click", (e) => {
+        const blcmt = e.target.parentNode;
+        const contentx = blcmt.querySelector("span").textContent;
+        const data2 = JSON.parse(localStorage.getItem("datainput2"));
+        for (let i = 0; i < data2.length; i++) {
+          console.log(data2[i].valueinput2, contentx);
+          if (data2[i].valueinput2.trim() === contentx.trim()) {
+            data2.splice(i, 1);
+          }
+          localStorage.setItem("datainput2", JSON.stringify(data2));
+        }
+        blcmt.remove();
+      });
+    }
+  }, 100);
 }

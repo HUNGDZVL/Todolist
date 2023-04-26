@@ -1048,7 +1048,7 @@ $colorRed: #f42323;
           transform: scale(1.1);
         }
       }
-      & i:nth-child(2) {
+      & i:nth-child(1) {
         color: $colorRed;
       }
     }
@@ -1139,15 +1139,24 @@ $colorRed: #f42323;
     display: flex;
 
     & span {
-      background-color: $iconcolor;
+      background-color: #d6d3d3bb;
+      color: black;
       padding: 4px;
-      font-weight: 600;
+      font-weight: 400;
       border-radius: 4px;
       margin-left: 2px;
     }
     & img {
       width: 25px;
       height: 25px;
+    }
+    & i {
+      color: red;
+      font-weight: 700;
+      &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+      }
     }
   }
   & img {
