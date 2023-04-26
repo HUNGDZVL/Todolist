@@ -117,7 +117,8 @@ function handleClickbtnAdds() {
         // xóa item
         clearItem(); // remove
         // click item show Form
-        handleClickItem(valuetext, valuefile);
+        handleClickItem();
+
         // reloadPageAfterDelay(20);
       });
 
@@ -229,7 +230,6 @@ function clearItem() {
       }
       //reset values input2 sau khi xoa items
       const dtinput2 = JSON.parse(localStorage.getItem("datainput2"));
-      console.log(dtinput2);
       if (dtinput2) {
         // kiểm tra xem nếu như hình ảnh và title của item bị xóa trùng với hình ảnh và title bên trong data local thì xóa object đó đi
         for (let i = 0; i < dtinput2.length; i++) {
@@ -479,9 +479,8 @@ exportButton.addEventListener("click", () => {
   // Tạo sự kiện click cho nút xuất file Excel
 });
 
-function handleClickItem(title, img) {
+function handleClickItem() {
   const Items = $$(".item__childss");
-
   const editJSs = $$(".edit-js");
   editJSs.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -503,9 +502,13 @@ function handleClickItem(title, img) {
     });
   });
 
-  for (let item of Items) {
+  for (let i = 0; i < Items.length; i++) {
+    //duyệt qua tất cả các phần tử và gắn lần lươt các phần tử đó với một event click kể các phần tử mới dc thêm
+    // tránh trường hợp 1 item có thể gắn nhiều sự kiện thì nên sài for(i++) và gắn thẳng onclick vô thay vì addeventlistener
+    let item = Items[i];
     //duyệt qua tất cả cac item
-    item.addEventListener("click", (e) => {
+    item.onclick = (e) => {
+      console.log(item);
       let valueInput = {}; //datalocal
       e.stopPropagation();
 
@@ -560,16 +563,17 @@ function handleClickItem(title, img) {
       divForm.innerHTML = htmlForm;
       global.appendChild(divForm);
       removeCmt();
+
       // xử lý form
       const closeFormInput = $(".modal__overlay");
 
       // đóng form
       const closeicon = $("#closeMD");
       closeFormInput.addEventListener("click", (e) => {
-        global.removeChild(divForm);
+        divForm.remove();
       });
       closeicon.addEventListener("click", (e) => {
-        global.removeChild(divForm);
+        divForm.remove();
       });
 
       // xử lí input 1
@@ -666,7 +670,7 @@ function handleClickItem(title, img) {
           input2.value = "";
         }
       });
-    });
+    };
   }
 }
 function removeCmt() {
@@ -679,7 +683,6 @@ function removeCmt() {
         const contentx = blcmt.querySelector("span").textContent;
         const data2 = JSON.parse(localStorage.getItem("datainput2"));
         for (let i = 0; i < data2.length; i++) {
-          console.log(data2[i].valueinput2, contentx);
           if (data2[i].valueinput2.trim() === contentx.trim()) {
             data2.splice(i, 1);
           }
