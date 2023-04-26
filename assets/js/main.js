@@ -107,7 +107,6 @@ function handleClickbtnAdds() {
           blDivvv.innerHTML = htmlsss;
           blItem.appendChild(blDivvv);
           // click item
-          handleClickItem();
           setTimeout(CountItems(), 100);
 
           editText();
@@ -115,7 +114,10 @@ function handleClickbtnAdds() {
 
         //reset innput sau khi add
         resetInput();
+        // xóa item
         clearItem(); // remove
+        // click item show Form
+        handleClickItem(valuetext, valuefile);
         // reloadPageAfterDelay(20);
       });
 
@@ -477,7 +479,7 @@ exportButton.addEventListener("click", () => {
   // Tạo sự kiện click cho nút xuất file Excel
 });
 
-function handleClickItem() {
+function handleClickItem(title, img) {
   const Items = $$(".item__childss");
 
   const editJSs = $$(".edit-js");
@@ -506,6 +508,17 @@ function handleClickItem() {
     item.addEventListener("click", (e) => {
       let valueInput = {}; //datalocal
       e.stopPropagation();
+
+      // xử lí giao diện form
+      let blItems = e.target.parentNode;
+      let BLItems = e.target.parentNode.parentNode.parentNode;
+      let imgItems = blItems.querySelector(".js--img");
+      let typeImg = imgItems.src.split("/").pop(); //img
+      let contentitems = blItems.querySelector(".js--content").textContent; //textcontent
+      let TextBlitem = BLItems.querySelector(
+        ".facet-list p:first-of-type"
+      ).textContent; //textBlockItem
+
       // mở form
 
       const global = $(".app");
@@ -517,8 +530,8 @@ function handleClickItem() {
       <div class="modal__body">
        <div class="auth__form">
          <div class="modal__header">
-          <p class="textTask">Task1</p>      
-          <p class="textTable">In the Table </p>   
+          <p class="textTask">${contentitems}</p>      
+          <p class="textTable">${TextBlitem} </p>   
           <div class="textclose">
             <i class="fa-solid fa-circle-xmark" id="closeMD"></i>
           </div> 
@@ -529,7 +542,7 @@ function handleClickItem() {
         <div class="modal__footer">
           <p class="footet__cmt">Comment</p>
           <label for="avt" id="avt">
-            <img src="./assets/img/avt1.png" alt="" class="imgmd" srcset="">
+            <img src="./assets/img/${typeImg}" alt="" class="imgmd" srcset="">
           
           <input type="text" placeholder="enter to submit comment...." class="cmt">
           <div class="sent">
@@ -558,24 +571,6 @@ function handleClickItem() {
       closeicon.addEventListener("click", (e) => {
         global.removeChild(divForm);
       });
-
-      // xử lí giao diện form
-      let blItems = e.target.parentNode;
-      let BLItems = e.target.parentNode.parentNode.parentNode;
-      let imgItems = blItems.querySelector(".js--img");
-      let typeImg = imgItems.src.split("/").pop(); //img
-      let contentitems = blItems.querySelector(".js--content").textContent; //textcontent
-      let TextBlitem = BLItems.querySelector(
-        ".facet-list p:first-of-type"
-      ).textContent; //textBlockItem
-
-      //thay đổi content Form
-      let textTask = $(".textTask");
-      textTask.textContent = contentitems;
-      let textTable = $(".textTable");
-      textTable.textContent = TextBlitem;
-      let imgForm = $(".imgmd");
-      imgForm.setAttribute("src", "./assets/img/" + typeImg);
 
       // xử lí input 1
       const input1 = $(".des");
