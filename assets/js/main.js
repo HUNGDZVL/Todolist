@@ -433,7 +433,6 @@ const exportButton = document.getElementById("js-export");
 exportButton.addEventListener("click", () => {
   // Lấy dữ liệu từ LocalStorage và chuyển đổi sang định dạng dữ liệu của thư viện xlsx
   const dataExport = JSON.parse(localStorage.getItem("data"));
-  console.log(dataExport);
 
   const workbook = XLSX.utils.book_new();
   // tạo bảng tính mới bằng xlsx
@@ -456,6 +455,13 @@ function handleClickItem() {
     });
   });
 
+  const edittext = $$(".inputedit");
+  edittext.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  });
+
   const removes = $$(".iconR");
   removes.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -463,14 +469,13 @@ function handleClickItem() {
     });
   });
 
-  closeFormInput.addEventListener;
   for (let item of Items) {
     //duyệt qua tất cả cac item
     item.addEventListener("click", (e) => {
       let valueInput = {}; //datalocal
-
       e.stopPropagation();
       // mở form
+
       const global = $(".app");
       const divForm = document.createElement("div");
       divForm.setAttribute("class", "modal__Description");
@@ -512,19 +517,14 @@ function handleClickItem() {
       global.appendChild(divForm);
 
       // xử lý form
-      const FormInput = $(".modal__Description");
       const closeFormInput = $(".modal__overlay");
 
       // đóng form
       const closeicon = $("#closeMD");
       closeFormInput.addEventListener("click", (e) => {
-          localStorage.setItem("dataInput", JSON.stringify(valueinputForm));
-        showReloadForm();
         global.removeChild(divForm);
       });
       closeicon.addEventListener("click", (e) => {
-          localStorage.setItem("dataInput", JSON.stringify(valueinputForm));
-        showReloadForm();
         global.removeChild(divForm);
       });
 
@@ -549,9 +549,29 @@ function handleClickItem() {
       // xử lí input 1
       const input1 = $(".des");
       const input2 = $(".cmt");
+      let valueinput1 = JSON.parse(localStorage.getItem("datainput1"));
+      if (valueinput1) {
+        for (let i = 0; i < valueinput1.length; i++) {
+          if (valueinput1[i].name == contentitems) {
+            input1.value = valueinput1[i].valueinput;
+          }
+        }
+      }
+
       input1.addEventListener("keydown", (e) => {
         if (e.keyCode === 13 && input1.value !== "") {
           let valuedes = e.target.value;
+          if (valuedes != "") {
+            let newdatainput = {
+              name: contentitems,
+              valueinput: valuedes,
+            };
+            let datainputform1 = localStorage.getItem("datainput1")
+              ? JSON.parse(localStorage.getItem("datainput1"))
+              : [];
+            datainputform1.push(newdatainput);
+            localStorage.setItem("datainput1", JSON.stringify(datainputform1));
+          }
           input1.style.fontSize = "1.4rem";
           input1.style.fontWeight = "800";
           input2.focus();
@@ -562,12 +582,46 @@ function handleClickItem() {
       });
 
       // xử lí input 2
+      let valueinputform2 = JSON.parse(localStorage.getItem("datainput2"));
+
+      if (valueinputform2) {
+        for (let i = 0; i < valueinputform2.length; i++) {
+          if (valueinputform2[i].name == contentitems && valueinputform2[i].img == typeImg) {
+            let divTexts = $(".textCmt");
+            let tagPs = document.createElement("p");
+            let htmlcmts = `
+            <img src="./assets/img/${valueinputform2[i].img}"/>
+            <span>
+          ${valueinputform2[i].valueinput2}
+          </span>
+          `;
+            tagPs.innerHTML = htmlcmts;
+            divTexts.appendChild(tagPs);
+          }
+        }
+      }else{
+      }
       input2.addEventListener("keydown", (e) => {
         if (e.keyCode === 13 && input2.value !== "") {
           let valuecmt = e.target.value;
+          if (valuecmt != "") {
+            let valueinput2 = localStorage.getItem("datainput2")
+              ? JSON.parse(localStorage.getItem("datainput2"))
+              : [];
+            let newdatainput2 = {
+              name: contentitems,
+              valueinput2: valuecmt,
+              img:typeImg,
+              
+            };
+            valueinput2.push(newdatainput2);
+            localStorage.setItem("datainput2", JSON.stringify(valueinput2));
+          }
           let divText = $(".textCmt");
           let tagP = document.createElement("p");
-          let htmlcmt = `<span>
+          let htmlcmt = `
+          <img src="./assets/img/${typeImg}"/>
+          <span>
           ${valuecmt}
           </span>
           `;
@@ -575,7 +629,6 @@ function handleClickItem() {
           divText.appendChild(tagP);
 
           valueInput.Cmt = valuecmt;
-          input2.setAttribute("disabled", true);
           input2.value = "";
         }
       });
@@ -584,16 +637,6 @@ function handleClickItem() {
         path: "./assets/img/" + typeImg,
         adress: TextBlitem,
       };
-      var valueinputForm = localStorage.getItem("dataInput")
-        ? JSON.parse(localStorage.getItem("dataInput"))
-        : [];
-
-      valueinputForm.push(valueInput);
     });
   }
-}
-
-function showReloadForm() {
-  let dataForm = JSON.parse(localStorage.getItem("dataInput"));
-  console.log(dataForm);
 }

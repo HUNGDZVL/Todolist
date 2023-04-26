@@ -1257,14 +1257,19 @@
 .textCmt p {
   font-weight: 400 !important;
   font-size: 1.2rem;
-  margin: 10px 35px;
+  margin: 7px 17px 10px 39px;
+  display: flex;
 }
 .textCmt p span {
   background-color: #cdcbcb;
   padding: 4px;
   font-weight: 600;
   border-radius: 4px;
-  margin-left: 10px;
+  margin-left: 2px;
+}
+.textCmt p img {
+  width: 25px;
+  height: 25px;
 }
 .textCmt img {
   margin-right: 24px;
