@@ -211,14 +211,12 @@ function clearItem() {
       blItemtrash.removeChild(itemtrash);
       // cập nhật lại số lượng item
       setTimeout(CountItems(), 100);
-      //reset values input sau khi xóa item
+      //reset values input1 sau khi xóa item
       const dtinput1 = JSON.parse(localStorage.getItem("datainput1"));
-      console.log(dtinput1);
-      console.log(filename);
-      console.log(text);
       if (dtinput1) {
         for (let i = 0; i < dtinput1.length; i++) {
           if (
+            // kiểm tra xem nếu như hình ảnh và title của item bị xóa trùng với hình ảnh và title bên trong data local thì xóa object đó đi
             dtinput1[i].name.trim() === text.trim() &&
             dtinput1[i].img.trim() == filename.trim()
           ) {
@@ -227,6 +225,21 @@ function clearItem() {
         }
         localStorage.setItem("datainput1", JSON.stringify(dtinput1));
       }
+      //reset values input2 sau khi xoa items
+      const dtinput2 = JSON.parse(localStorage.getItem("datainput2"));
+      console.log(dtinput2);
+      if (dtinput2) {
+        // kiểm tra xem nếu như hình ảnh và title của item bị xóa trùng với hình ảnh và title bên trong data local thì xóa object đó đi
+        for (let i = 0; i < dtinput2.length; i++) {
+          if (
+            dtinput2[i].name.trim() === text.trim() &&
+            dtinput2[i].img.trim() == filename.trim()
+          ) {
+            dtinput2.splice(i, 1);
+          }
+        }
+      }
+      localStorage.setItem("datainput2", JSON.stringify(dtinput2));
     });
   }
 }
