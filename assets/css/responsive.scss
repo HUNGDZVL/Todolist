@@ -1,4 +1,8 @@
 @media (min-width: 740px) and (max-width: 1023px) {
+  .row__content {
+    margin-left: 50px !important;
+    margin-top: 60px !important;
+  }
   .header__search {
     display: none !important;
   }
@@ -54,11 +58,9 @@
   }
 
   .content__item--add {
-    margin: auto;
     width: 240px;
   }
   .content__item--child {
-    margin-left: 26px;
     .item__child {
       width: 240px;
     }
@@ -69,6 +71,9 @@
       position: absolute;
       left: -174px;
     }
+  }
+  .container__content--item {
+    margin-bottom: 70px;
   }
   .footer--header {
     display: none;
@@ -112,14 +117,44 @@
   }
   #div-js {
     width: 241px !important;
-    left: 27px !important;
+
     & button {
-      margin-left: 66px!important;
+      margin-left: 66px !important;
     }
   }
-  #avts{
+  #avts {
     position: absolute;
-    left: 12px!important;
+    left: 12px !important;
+  }
+  .modal__header {
+    padding: 60px 22px !important;
+    & p {
+      font-size: 2.4rem !important;
+    }
+  }
+  #closeMD {
+    position: relative;
+    top: -8px;
+    font-size: 3.4rem;
+  }
+  input.des {
+    font-size: 2.4rem !important;
+  }
+  .modal__container input {
+    padding-bottom: 200px;
+  }
+
+  .modal__footer p {
+    font-size: 2.2rem;
+    font-weight: 700;
+  }
+  label#avt {
+    font-size: 1.7rem;
+  }
+  .modal__footer #avt img {
+    display: block;
+    width: 50px;
+    height: 44px;
   }
 }
 @media (max-width: 740px) {
@@ -172,7 +207,20 @@
   .container__content--item {
     margin-left: -8px;
   }
-  #div-js{
-    left: 80px !important;
+  #div-js {
+    left: 20px !important;
+    top: 15px !important;
+  }
+  .container__info--table {
+    display: none;
+  }
+  .container__info--icon {
+    margin-top: 20px;
+  }
+  .content__item--add {
+    margin: 30px 20px;
+  }
+  .auth__form {
+    max-width: 400px;
   }
 }
