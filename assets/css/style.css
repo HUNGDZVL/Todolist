@@ -501,6 +501,28 @@
   margin: auto;
 }
 
+.active:active {
+  transform: scale(1.2);
+  background-color: #fff;
+  border-radius: 12%;
+  border: none !important;
+}
+.active:active .text,
+.active:active .icon {
+  color: #417ed9;
+  position: relative;
+}
+.active:active .icon::before {
+  content: "";
+  left: 25px;
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  background-color: #417ed9;
+  top: -11px;
+}
+
 .container__sidebar--bot {
   margin-top: 200px;
 }

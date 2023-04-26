@@ -211,8 +211,22 @@ function clearItem() {
       blItemtrash.removeChild(itemtrash);
       // cập nhật lại số lượng item
       setTimeout(CountItems(), 100);
-
       //reset values input sau khi xóa item
+      const dtinput1 = JSON.parse(localStorage.getItem("datainput1"));
+      console.log(dtinput1);
+      console.log(filename);
+      console.log(text);
+      if (dtinput1) {
+        for (let i = 0; i < dtinput1.length; i++) {
+          if (
+            dtinput1[i].name.trim() === text.trim() &&
+            dtinput1[i].img.trim() == filename.trim()
+          ) {
+            dtinput1.splice(i, 1);
+          }
+        }
+        localStorage.setItem("datainput1", JSON.stringify(dtinput1));
+      }
     });
   }
 }

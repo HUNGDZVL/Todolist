@@ -403,6 +403,24 @@ $colorRed: #f42323;
     }
   }
 }
+
+.active:active {
+  transform: scale(1.2);
+  background-color: $bgicon;
+  border-radius: 12%;
+  border: none !important;
+  .text,
+  .icon {
+    color: $coloractive;
+    position: relative;
+  }
+  .icon {
+    &::before {
+      @include beforegreen();
+      top: -11px;
+    }
+  }
+}
 .container__sidebar--bot {
   margin-top: 200px;
   & .sidebar__bot-img:nth-child(1) {
@@ -1153,7 +1171,7 @@ $colorRed: #f42323;
     & i {
       color: red;
       font-weight: 700;
-      &:hover{
+      &:hover {
         cursor: pointer;
         transform: scale(1.1);
       }
