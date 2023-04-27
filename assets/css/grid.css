@@ -440,7 +440,7 @@
 }
 
 /* > PC low resolution */
-@media (min-width: 1023px) and (max-width: 1360px) {
+@media (min-width: 1023px) and (max-width: 1240px) {
     .wide {
         width: 984px;
     }
